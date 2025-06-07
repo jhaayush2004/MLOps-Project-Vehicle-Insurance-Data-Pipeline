@@ -19,6 +19,7 @@ uvicorn                 # ASGI web server implementation, commonly used to serve
 jinja2                  # Modern and designer-friendly templating language for Python, often used for web page generation.
 imblearn                # Library for imbalanced datasets in machine learning, providing resampling strategies.
 -e .                    # Specifies an "editable" installation of the current project (defined by setup.py/pyproject.toml).
+setuptools
 # -e . first goes to setup.py and find local packages used in src folder or other mentioned folder and then propoerly installs it in environment for smooth run and it also looks for pyproject.toml to maintain meta data and all to avoid any large error. Or we can say it helps to install our local packages into our environment and also also stores our meta data and project configuration to prevent any error related to these.
 # Okay, let's understand -e . by comparing it to what happens when it's not there, and how that impacts your development workflow.
 
