@@ -1,0 +1,105 @@
+ipykernel               # Provides the IPython kernel for Jupyter and other interactive computing.
+pandas                  # Core library for data manipulation and analysis, especially with tabular data.
+numpy                   # Fundamental package for numerical computing, especially with arrays.
+matplotlib              # Comprehensive library for creating static, interactive, and animated visualizations in Python.
+plotly                  # Interactive graphing library for scientific charting, data visualization, and dashboards.
+seaborn                 # Statistical data visualization library based on Matplotlib.
+scikit-learn            # Machine learning library offering various classification, regression, and clustering algorithms.
+pymongo                 # Python driver for MongoDB, enabling interaction with MongoDB databases.
+from_root               # Utility for conveniently accessing files relative to the project root directory.
+dill                    # Extends Python's `pickle` module for more robust serialization of complex objects.
+certifi                 # Provides Mozilla's collection of SSL certificates for validating TLS connections.
+PyYAML                  # YAML parser and emitter for Python, used for reading and writing YAML configuration files.
+boto3                   # AWS SDK for Python, allowing interaction with Amazon Web Services.
+mypy-boto3-s3           # Type stubs for boto3 S3 service, providing type hints for static analysis.
+botocore                # Low-level interface to AWS web services, a dependency of boto3.
+fastapi                 # Modern, fast web framework for building APIs with Python 3.7+ based on standard Python type hints.
+python-multipart        # Library to parse form data (e.g., file uploads) in web applications, used by FastAPI.
+uvicorn                 # ASGI web server implementation, commonly used to serve FastAPI applications.
+jinja2                  # Modern and designer-friendly templating language for Python, often used for web page generation.
+imblearn                # Library for imbalanced datasets in machine learning, providing resampling strategies.
+-e .                    # Specifies an "editable" installation of the current project (defined by setup.py/pyproject.toml).
+# -e . first goes to setup.py and find local packages used in src folder or other mentioned folder and then propoerly installs it in environment for smooth run and it also looks for pyproject.toml to maintain meta data and all to avoid any large error. Or we can say it helps to install our local packages into our environment and also also stores our meta data and project configuration to prevent any error related to these.
+# Okay, let's understand -e . by comparing it to what happens when it's not there, and how that impacts your development workflow.
+
+# Scenario 1: -e . IS in requirements.txt
+# # requirements.txt
+# pandas
+# scikit-learn
+# -e .
+# Let's assume your project structure looks like this:
+
+# my_awesome_project/
+# ├── my_app.py
+# ├── my_module/
+# │   ├── __init__.py
+# │   └── helper_functions.py
+# ├── setup.py  # Or pyproject.toml
+# └── requirements.txt
+# And your my_app.py might contain:
+
+# Python
+
+# import pandas
+# import scikit_learn
+# from my_module import helper_functions # <-- This is your local code
+
+# # ... rest of your app ...
+# What happens when you run pip install -r requirements.txt:
+
+# pip installs pandas and scikit-learn in the usual way:
+# It downloads them from PyPI.
+# It places their files into your virtual environment's site-packages directory.
+# When pip encounters -e .:
+# It looks for setup.py (or pyproject.toml) in the current directory (my_awesome_project/). This file tells pip that my_awesome_project itself is a Python package.
+# Instead of copying my_module into site-packages, pip creates a symlink (shortcut) in site-packages that points directly back to my_awesome_project/my_module/.
+# The Big Advantage (Editable Mode):
+
+# Now, when you run my_app.py (from within your activated venv):
+
+# import my_module will use the files directly from my_awesome_project/my_module/.
+# If you open my_awesome_project/my_module/helper_functions.py in your VS Code and make a change, that change is instantly active the next time you run my_app.py or any other script that imports my_module. You do not need to re-run pip install or any other command. This is why it's called "editable" – you edit the source code directly, and your environment sees the changes immediately.
+# This is the standard and most convenient way to develop your own Python packages or applications that include their own local modules.
+
+# Scenario 2: -e . IS NOT in requirements.txt
+# # requirements.txt
+# pandas
+# scikit-learn
+# # No -e . here
+# Now, let's say you want to run my_app.py and it still needs to import my_module.
+
+# What happens when you run pip install -r requirements.txt:
+
+# pip installs pandas and scikit-learn as before.
+# It does nothing regarding your local my_module package because there's no instruction to install it.
+# The Problem (Without Editable Mode for Local Code):
+
+# If my_app.py tries to import my_module, you will get an ModuleNotFoundError:
+
+# Traceback (most recent call last):
+#   File "my_app.py", line X, in <module>
+#     from my_module import helper_functions
+# ModuleNotFoundError: No module named 'my_module'
+# Why? Because my_module is just a folder in your project directory. Python's import system doesn't automatically look for modules in arbitrary subdirectories of your project unless:
+
+# You add the project's root directory to sys.path (manual and generally not recommended for clean projects).
+# You specifically install it.
+# How you would make my_module importable without -e . (but this is less convenient for development):
+
+# You would have to treat my_module like any other package you're releasing:
+
+# Package it: Create a distribution package (e.g., a .whl or .tar.gz file) using python setup.py sdist bdist_wheel (or poetry build).
+# Install it: Then, you would explicitly install that built package into your environment: pip install ./dist/my_module-1.0.0-py3-none-any.whl (assuming my_module version 1.0.0).
+# The Workflow Pain:
+
+# If you made a change to my_module/helper_functions.py in this scenario, you would have to:
+
+# Re-run the packaging step (python setup.py bdist_wheel).
+# Re-install the new package (pip install --upgrade ./dist/my_module-1.0.0-py3-none-any.whl).
+# Then run my_app.py to see the changes.
+# This is obviously much slower and more cumbersome during active development than the instant updates provided by -e ..
+
+# Conclusion
+# -e . (Editable Mode): Use it when you are actively developing the Python package/application that resides in the current directory and you want changes to its source code to be immediately reflected in your Python environment without reinstallation. It's for development setup.
+# Without -e .: Your local code is not automatically made importable as a package. You'd typically only skip -e . if the requirements.txt is for installing only external dependencies, or if your project isn't designed as a Python package itself (though most Python projects benefit from being treated as such).
+# So, -e . is a powerful shortcut that dramatically improves the developer experience when working on a Python project that includes its own internal modules or is itself a library.
