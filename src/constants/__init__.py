@@ -65,7 +65,7 @@ MODEL_TRAINER_MIN_SAMPLES_LEAF: int = 6
 MIN_SAMPLES_SPLIT_MAX_DEPTH: int = 10
 MIN_SAMPLES_SPLIT_CRITERION: str = 'entropy'
 MIN_SAMPLES_SPLIT_RANDOM_STATE: int = 101
-
+# the above are the best parameters obtained from random search cv
 """
 MODEL Evaluation related constants
 """
