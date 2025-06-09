@@ -195,3 +195,4 @@ cython_debug/
 
 artifact/
 .env
+notebook/firstproj_accessKeys.csv
