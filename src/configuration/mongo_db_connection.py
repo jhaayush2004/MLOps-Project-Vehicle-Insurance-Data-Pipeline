@@ -5,7 +5,12 @@ import certifi
 
 from src.exception import MyException
 from src.logger import logging
-from src.constants import DATABASE_NAME, MONGODB_URL_KEY
+from src.constants import DATABASE_NAME , MONGODB_URL_KEY
+
+from dotenv import load_dotenv # Import the library
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Load the certificate authority file to avoid timeout errors when connecting to MongoDB
 ca = certifi.where()
