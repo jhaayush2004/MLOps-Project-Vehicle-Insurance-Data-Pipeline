@@ -1,6 +1,6 @@
 # MLOps Project - Vehicle Insurance Data Pipeline
 
-Welcome to the **Vehicle Insurance Data Pipeline** – an end-to-end MLOps project showcasing how real-world machine learning pipelines are designed, built, deployed, and automated using modern tools and platforms. This project is designed not only to demonstrate data and model handling but also to impress recruiters by implementing industry-standard CI/CD practices, scalable storage (MongoDB + AWS S3), and seamless deployment on AWS EC2 using Docker and GitHub Actions.
+Welcome to the **Vehicle Insurance Data Pipeline** – an end-to-end MLOps project showcasing how real-world machine learning pipelines are designed, built, deployed, and automated using modern tools and platforms. This project is designed to demonstrate data and model handling by implementing industry-standard CI/CD practices, scalable storage (MongoDB + AWS S3), and seamless deployment on AWS EC2 using Docker and GitHub Actions.
 
 ---
 
