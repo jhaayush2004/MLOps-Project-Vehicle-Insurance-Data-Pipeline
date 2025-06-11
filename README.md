@@ -17,6 +17,31 @@ Welcome to the **Vehicle Insurance Data Pipeline** – an end-to-end MLOps proje
 
 ## 📁 Project Structure and Setup
 
+
+```
+📦vehicle-classification
+ ┣ 📂src
+ ┃ ┣ 📂components
+ ┃ ┣ 📂data_access
+ ┃ ┣ 📂aws_storage
+ ┃ ┣ 📂configuration
+ ┃ ┣ 📂entity
+ ┃ ┣ 📂pipeline
+ ┃ ┗ 📜utils
+ ┣ 📂notebook
+ ┣ 📂static
+ ┣ 📂templates
+ ┣ 📜app.py
+ ┣ 📜requirements.txt
+ ┣ 📜Dockerfile
+ ┣ 📜.dockerignore
+ ┣ 📜setup.py
+ ┣ 📜pyproject.toml
+ ┗ 📜README.md
+```
+
+---
+
 ### 1️⃣ Project Template Creation
 
 Run `template.py` to automatically generate a clean project structure:
@@ -396,5 +421,14 @@ graph TD;
 [MIT License](LICENSE)
 
 ---
+
+
+
+
+
+
+
+
+
 
 
